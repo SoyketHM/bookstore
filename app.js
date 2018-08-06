@@ -49,6 +49,17 @@ app.put('/api/genres/:_id', (req,res)=>{
     });
 });
 
+// delete genres
+app.delete('/api/genres/:_id', (req,res)=>{
+    let id = req.params._id;
+    Genre.deleteGenre(id, (err, genre)=>{
+        if(err){
+            throw err;
+        }
+        res.json(genre);
+    });
+});
+
 // show books
 app.get('/api/books', (req,res)=>{
     Book.getBook((err, books)=>{
@@ -73,6 +84,29 @@ app.get('/api/books/:_id', (req,res)=>{
 app.post('/api/books', (req,res)=>{
     let book =  req.body;
     Book.addBook(book, (err, book)=>{
+        if(err){
+            throw err;
+        }
+        res.json(book);
+    });
+});
+
+// update genres
+app.put('/api/books/:_id', (req,res)=>{
+    let id = req.params._id;
+    let book =  req.body;
+    Book.updateBook(id,book,{}, (err, book)=>{
+        if(err){
+            throw err;
+        }
+        res.json(book);
+    });
+});
+
+// delete genres
+app.delete('/api/books/:_id', (req,res)=>{
+    let id = req.params._id;
+    Book.deleteBook(id, (err, book)=>{
         if(err){
             throw err;
         }
